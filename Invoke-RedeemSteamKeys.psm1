@@ -8,6 +8,31 @@ function Invoke-RedeemSteamKeys {
     Import-Module Monocle
   }
 
+  function Update-ChromeDriver {
+    $monoclePath = Get-Item -Path (Get-Module -Name Monocle | Select-Object -ExpandProperty Path) | Select-Object -ExpandProperty DirectoryName
+    $chromeDriverPath = "$monoclePath\lib\Browsers\win\chromedriver.exe"
+    $chromeDriverVersion = & $chromeDriverPath --version
+    $currentChromedriverversion = Invoke-RestMethod -Method Get -Uri 'https://raw.githubusercontent.com/bempus/PowerShell-RedeemSteamKeys/main/chromedriver.version'
+
+    if ($chromeDriverVersion -notLike "ChromeDriver $currentChromedriverversion*") {
+      Write-Host "ChromeDriver is out of date, updating..." -ForegroundColor Green
+      $chromeDriverFolder = (Get-Item $chromeDriverPath).DirectoryName
+      $expandedPath = "$chromeDriverFolder\chromedriver"
+      $zipPath = "$expandedPath.zip"
+      Invoke-WebRequest -Uri "https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/$currentChromedriverversion/win32/chromedriver-win32.zip" -OutFile $zipPath
+      Expand-Archive -Path $zipPath -DestinationPath $expandedPath
+      Remove-Item $chromeDriverPath
+      Move-Item "$expandedPath\chromedriver-win32\chromedriver.exe" "$chromeDriverFolder\chromedriver.exe"
+      Remove-Item -Path $expandedPath, $zipPath -Recurse
+    }
+  }
+ 
+  try {
+    Update-ChromeDriver
+  }
+  catch {
+    Write-Host "Could not update ChromeDriver: $($_.Exception.Message)"
+  }
 
   Add-Type -AssemblyName System.Windows.Forms
 

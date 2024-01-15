@@ -11,7 +11,7 @@ For this reason I created this script to automate the process. And I now want to
 Powershell Core (7 or above)
 
 Google Chrome is required for Windows  
-Firefox is required for Mac and Linux <span style="color: red"> These are not fully tested!</span>
+Firefox is required for Mac and Linux (These are not fully tested!)
 
 Because of a limitations in Steam, where there is an maximum number of keys to redeem per hour, the script will attempt to redeem codes until it reaches an error about maximum number of keys. After this it'll wait for 1 hour before continuing. If you stop the script, or turn the power off, you'll have to check the log to get the last failed key and make a new file (or edit the current file) by removing the previous keys and after that run the code again.
 

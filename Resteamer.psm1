@@ -1,8 +1,6 @@
 
 
 function Invoke-RedeemSteamKeys {
-
-
   #Disables Monocle logging
   $monoclePath = Get-Item -Path (Get-Module -Name Monocle | Select-Object -ExpandProperty Path) | Select-Object -ExpandProperty DirectoryName
   $monocleToolPath = Join-Path -Path $monoclePath -ChildPath 'Private/Tools.ps1'
@@ -89,9 +87,8 @@ function Invoke-RedeemSteamKeys {
       return Write-Host "A file is required" -ForegroundColor Red
     }
     $file = $filePicker.FileName
-    New-Item -path $logpath -ItemType Directory
 
-    $monocleType = "Chrome"
+    $monocleType = 'Chrome'
   }
   else {
     while (-not ($file)) {
@@ -103,8 +100,8 @@ function Invoke-RedeemSteamKeys {
     }
 
     $monocleType = 'Firefox'
-    
   }
+
 
 
   switch ((Get-Item $file).Extension) {
@@ -137,6 +134,11 @@ function Invoke-RedeemSteamKeys {
   $logName = "$(Get-Date -Format 'yyyy-MM-dd')_steam.log"
   $LogFolderPath = Join-Path -path ([Environment]::GetFolderPath('MyDocuments')) -ChildPath "Resteamer"
   $LogPath = Join-Path -Path $LogFolderPath -ChildPath $logName
+
+  if (-not (Test-Path -Path $LogPath -PathType Leaf)) {
+    New-Item -Path $LogPath -ItemType File -Force | Out-Null
+  }
+  Write-Host "Writing logs to: '$LogPath'"
 
   function New-JS_Toast {
     param (

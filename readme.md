@@ -2,7 +2,7 @@
 
 ## Why
 
-After donating during Jingle Jam and receiving the [Jingle Jam collection](https://jinglejam.tiltify.com/), getting a ton of Steam keys, I found the **very first world problem** of having to redeem all the keys.
+After donating during [Jingle Jam](https://jinglejam.tiltify.com/) and receiving the Jingle Jam collection, getting a ton of Steam keys, I found the **very first world problem** of having to redeem all the keys.
 
 For this reason I created this script to automate the process. And I now want to share it with you.
 

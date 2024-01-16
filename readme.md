@@ -29,7 +29,7 @@ Because of a limitations in Steam, where there is an maximum number of keys to r
 ## Manual Install
 
 - Save the unzipped file to your preferred location.
-- Open Powershell and type: `cd \"path/to/Invoke-RedeemSteamKeys/\"`
+- Open Powershell and type: `cd "path/to/Invoke-RedeemSteamKeys/"`
 - Type: `Import-Module ./Invoke-RedeemSteamKeys.psm1`
 - Type `Invoke-RedeemSteamKeys`
 - Follow the instructions
